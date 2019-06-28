@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - WebApplication",
+            "request": "launch",
+            "mainClass": "com.inspect.web.WebApplication",
+            "projectName": "web"
+        }
+    ]
+}
