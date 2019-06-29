@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top : 56px;">
   <Header></Header>
-    <div class="d-flex justify-content-center py-5">
+    <div class="d-flex justify-content-center py-5" style="margin : 7% 0 7% 0">
         <form>
             <p class="h4 text-center mb-4">Sign up</p>
             <div class="grey-text">
@@ -21,7 +21,8 @@
 <script>
   import { mdbInput, mdbBtn } from 'mdbvue';
   import Footer from '@/components/common/Footer.vue';
-    import Header from '@/components/common/Header.vue';
+  import Header from '@/components/common/Header.vue';
+
   export default {
     name: 'Basic',
     components: {
@@ -33,5 +34,10 @@
   }
 </script>
 <style scoped>
-
+#footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 </style>
