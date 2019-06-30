@@ -1,7 +1,7 @@
 <template>
 <div style="margin-top : 56px">
   <Header></Header>
-    <div class="d-flex justify-content-center" style="margin: 7.18% 0 7.18% 0;">
+    <div class="d-flex justify-content-center" style="margin: 7.25% 0 7.25% 0;">
   <form class="my-5">
     <p class="h4 text-center mb-4">Sign in</p>
     <div class="grey-text">

@@ -1,7 +1,13 @@
 <template>
 <div style="margin-top : 56px;">
     <Header></Header>
-    <div style="margin:5% 15% 2% 15%">
+    <div style="margin:3% 15% 2% 15%">
+    <div class="d-flex justify-content-end">
+        <mdb-form-inline class="active-blue">
+            <mdbIcon class="mr-2" icon="search"/>
+            <mdb-input type="text" placeholder="Search" aria-label="Search"/>
+        </mdb-form-inline>
+    </div>
     <mdb-tbl hover class="col-6 col-sm-12" style="text-align:center;">
         <mdb-tbl-head>
         <tr>
@@ -72,14 +78,14 @@
             <mdb-page-item>5</mdb-page-item>
             <mdb-page-item next>Next</mdb-page-item>
         </mdb-pagination>
-        <mdb-btn color="primary">Write</mdb-btn>
+        <router-link to="/write"><mdb-btn color="primary">Write</mdb-btn></router-link>
     </div>
     </div>
     <Footer></Footer>
 </div>
 </template>
 <script>
-    import { mdbTbl, mdbTblHead, mdbTblBody, mdbPagination, mdbPageItem, mdbPageNav, mdbBtn } from 'mdbvue';
+    import { mdbTbl, mdbTblHead, mdbTblBody, mdbPagination, mdbPageItem, mdbPageNav, mdbBtn, mdbIcon, mdbFormInline, mdbInput } from 'mdbvue';
     import Footer from '@/components/common/Footer.vue';
     import Header from '@/components/common/Header.vue';
 
@@ -94,9 +100,16 @@
       mdbPagination,
       mdbPageItem,
       mdbPageNav,
-      mdbBtn
+      mdbBtn,
+      mdbIcon,
+      mdbFormInline,
+      mdbInput
     }
   }
 </script>
 <style scoped>
+    .active-blue input[type=text]:focus:not([readonly]) {
+        border-bottom: 1px solid #4285f4;
+        box-shadow: 0 1px 0 0 #4285f4;
+    }
 </style>

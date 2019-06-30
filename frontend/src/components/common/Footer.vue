@@ -9,7 +9,7 @@
         <mdb-col sm="3" col="4">
           <h5 class="font-weight-bold">USEFUL</h5>
           <ul>
-            <li class="list-unstyled mb-2"><a href="#!">Your Account</a></li>
+            <li class="list-unstyled mb-2"><a @click="modal">Your Account</a></li>
             <li class="list-unstyled mb-2"><a href="#!">Board</a></li>
             <li class="list-unstyled mb-2"><a href="#!">Home</a></li>
           </ul>
@@ -36,22 +36,54 @@
         &copy; 2019 Design by: <a class="font-weight-bold" href="#!" target="_blank">Choi-DongHun </a>
       </mdb-container>
     </div>
+    <div>
+      <mdb-modal id="account_modal" :show="subs" @close="subs = false">
+      <mdb-modal-body class="mx-3 grey-text">
+        <mdb-input label="Your email" icon="envelope" type="email" class="mb-5"/>
+        <mdb-input label="New password" icon="lock" type="password" class="mb-5"/>
+        <mdb-input label="Confirm your password" icon="exclamation-triangle" type="password" class="mb-5"/>
+      </mdb-modal-body>
+      <mdb-modal-footer center>
+        <mdb-btn @click.native="subs = false" color="blue">Send <mdb-icon icon="paper-plane" class="ml-1"/></mdb-btn>
+      </mdb-modal-footer>
+    </mdb-modal>
+    </div>
   </mdb-footer>
 </template>
 <script>
-  import { mdbFooter, mdbContainer, mdbRow, mdbCol, mdbBtn, mdbIcon } from 'mdbvue';
+  import { mdbFooter, mdbContainer, mdbRow, mdbCol, mdbIcon, mdbBtn, mdbModal, mdbModalHeader, mdbModalBody, mdbInput, mdbModalFooter } from 'mdbvue';
   export default {
     name: 'FooterPage',
     components: {
       mdbFooter,
       mdbContainer,
       mdbRow,
-      mdbCol
+      mdbCol,
+      mdbBtn,
+      mdbModal,
+      mdbModalHeader,
+      mdbModalBody,
+      mdbInput,
+      mdbModalFooter,
+      mdbIcon
+    },
+    data() {
+      return {
+        subs: false,
+      }
+    },
+    methods : {
+      modal () {
+        this.subs = true;
+      }
     }
   }
 </script>
 <style scoped>
   .no-margin-top {
       margin-top: 0 !important;
+  }
+  #account_modal {
+    padding-top: 7%;
   }
 </style>

@@ -14,7 +14,7 @@
         <mdb-dropdown tag="li" class="nav-item mx-3">
             <mdb-dropdown-toggle tag="a" navLink slot="toggle" waves-fixed>Information</mdb-dropdown-toggle>
             <mdb-dropdown-menu>
-              <mdb-dropdown-item>Technology</mdb-dropdown-item>
+              <mdb-dropdown-item><router-link to="/technology">Technology</router-link></mdb-dropdown-item>
               <mdb-dropdown-item href="https://github.com/choi94/Boot-Vue-H2-JPA">Github</mdb-dropdown-item>
             </mdb-dropdown-menu>
         </mdb-dropdown>

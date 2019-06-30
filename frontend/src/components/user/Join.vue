@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top : 56px;">
   <Header></Header>
-    <div class="d-flex justify-content-center py-5" style="margin : 7% 0 7% 0">
+    <div class="d-flex justify-content-center py-5" style="margin : 7.08% 0 7.08% 0">
         <form>
             <p class="h4 text-center mb-4">Sign up</p>
             <div class="grey-text">
