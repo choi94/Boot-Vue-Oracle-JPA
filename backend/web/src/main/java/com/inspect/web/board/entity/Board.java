@@ -45,11 +45,11 @@ public class Board implements Serializable{
     @Column(name = "BOARD_CONTENTS", nullable = false)
     private String boardContents;
 
-    @Column(name = "BOARD_VIEWS", nullable = false)
+    @Column(name = "BOARD_VIEWS", columnDefinition = "number(5) default 0", insertable = false)
     private Integer boardViews;
 
     @CreationTimestamp
-    @Column(name = "BOARD_REG", columnDefinition = "number(5) default 0")
+    @Column(name = "BOARD_REG")
     private Timestamp boardReg;
 
     @ManyToOne

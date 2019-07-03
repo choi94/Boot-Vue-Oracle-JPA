@@ -12,6 +12,8 @@ import com.inspect.web.board.repository.BoardRepository;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,7 +48,7 @@ public class BoardService {
     public List<BoardDTO> findAll() {
         Function<BoardRepository, List<BoardDTO>> boardList = b -> {
             List<BoardDTO> boardDTO = new ArrayList<>();
-            Iterable<Board> boards = boardRepository.findAll();
+            Iterable<Board> boards = b.findAll();
 
             for (Board p : boards){
                 boardDTO.add(modelMapper.map(p, BoardDTO.class)); 
@@ -56,6 +58,14 @@ public class BoardService {
         };
 
         return boardList.apply(boardRepository);
+    }
+
+    public List<BoardDTO> findbyPageing() {
+        Function<BoardRepository, List<BoardDTO>> boardPageing = b -> {
+            Pageable pageing = new PageRequest(0, 7);
+            return null;
+        };
+        return boardPageing.apply(boardRepository);
     }
 
     public BoardDTO findById(Long boardNum) {
@@ -72,8 +82,8 @@ public class BoardService {
         return boardList.apply(boardRepository);
     }
 
-    public HashMap<String, Object> save(BoardDTO board){
-        Function<BoardDTO, HashMap<String,Object>> boardSave = b -> {
+    public HashMap<String, Object> save(Board board){
+        Function<Board, HashMap<String,Object>> boardSave = b -> {
             HashMap<String, Object> result = new HashMap<>();
 
             boardEntity = modelMapper.map(board, Board.class);

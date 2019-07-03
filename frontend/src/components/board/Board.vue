@@ -18,67 +18,18 @@
         </tr>
         </mdb-tbl-head>
         <mdb-tbl-body>
-        <tr>
-            <th>Mark</th>
-            <td>Lorem ipsum dolor shenderit quasi provident.</td>
-            <td>5</td>
-            <td>19-06-30</td>
-        </tr>
-        <tr>
-            <th>ipsum</th>
-            <td>Lorem ipsum dolor shenderit quasi provident.</td>
-            <td>1</td>
-            <td>19-06-30</td>
-        </tr>
-        <tr>
-            <th>Mark</th>
-            <td>Lorem ipsum dolor shenderit quasi provident.</td>
-            <td>85</td>
-            <td>19-06-30</td>
-        </tr>
-        <tr>
-            <th>Mark</th>
-            <td>Lorem ipsum dolor shenderit quasi provident.</td>
-            <td>54</td>
-            <td>19-06-30</td>
-        </tr>
-        <tr>
-            <th>Mark</th>
-            <td>Lorem ipsum dolor shenderit quasi provident.</td>
-            <td>20</td>
-            <td>19-06-30</td>
-        </tr>
-        <tr>
-            <th>Mark</th>
-            <td>Lorem ipsum dolor shenderit quasi provident.</td>
-            <td>31</td>
-            <td>19-06-30</td>
-        </tr>
-        <tr>
-            <th>Mark</th>
-            <td>Lorem ipsum dolor shenderit quasi provident.</td>
-            <td>5</td>
-            <td>19-06-30</td>
-        </tr>
-        <tr>
-            <th>Mark</th>
-            <td>Lorem ipsum dolor shenderit quasi provident.</td>
-            <td>5</td>
-            <td>19-06-30</td>
+        <tr v-for="item in list" v-bind:key="item.id">
+            <th>{{ item.boardEmail }}</th>
+            <td>{{ item.boardTitle }}</td>
+            <td>{{ item.boardContents }}</td>
+            <td>{{ item.boardReg }}</td>
         </tr>
         </mdb-tbl-body>
     </mdb-tbl>
     <div class="d-flex justify-content-between mt-5 flex-wrap">
-        <mdb-pagination class="p-2" color="blue" style="margin-left:31%;">
-            <mdb-page-item disabled>Previous</mdb-page-item>
-            <mdb-page-item active>1</mdb-page-item>
-            <mdb-page-item>2</mdb-page-item>
-            <mdb-page-item>3</mdb-page-item>
-            <mdb-page-item>4</mdb-page-item>
-            <mdb-page-item>5</mdb-page-item>
-            <mdb-page-item next>Next</mdb-page-item>
-        </mdb-pagination>
-        <router-link to="/write"><mdb-btn color="primary">Write</mdb-btn></router-link>
+        <div v-if="this.$store.state.session_email != ''">
+            <router-link to="/write"><mdb-btn color="primary">Write</mdb-btn></router-link>
+        </div>
     </div>
     </div>
     <Footer></Footer>
@@ -88,6 +39,7 @@
     import { mdbTbl, mdbTblHead, mdbTblBody, mdbPagination, mdbPageItem, mdbPageNav, mdbBtn, mdbIcon, mdbFormInline, mdbInput } from 'mdbvue';
     import Footer from '@/components/common/Footer.vue';
     import Header from '@/components/common/Header.vue';
+    import axios from 'axios';
 
   export default {
     name: 'TablePage',
@@ -104,7 +56,24 @@
       mdbIcon,
       mdbFormInline,
       mdbInput
+    },
+    data() {
+        return {
+            list : []
+        }
+    },
+    created() {
+        let uri = 'http://localhost:8080/board'
+
+        axios.get(`${uri}/list`)
+            .then( res => {
+                this.list= res.data;
+            })
+            .catch( e => {
+                alert('실패')
+            })
     }
+    
   }
 </script>
 <style scoped>

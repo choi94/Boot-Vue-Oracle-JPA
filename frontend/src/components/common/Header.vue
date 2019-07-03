@@ -19,9 +19,6 @@
           <router-link to="/login"><mdb-nav-item class="mx-3" active>Login</mdb-nav-item></router-link>
           <router-link to="/join"><mdb-nav-item class="mx-3" active>Join</mdb-nav-item></router-link>
         </div>
-        <div class="d-flex" v-if="this.$store.state.session_email != ''">
-          <mdb-nav-item @click="logout" class="mx-3" active>Logout</mdb-nav-item>
-        </div>
         <router-link to="/board"><mdb-nav-item class="mx-3" active>Board</mdb-nav-item></router-link>
         <mdb-dropdown tag="li" class="nav-item mx-3">
             <mdb-dropdown-toggle tag="a" navLink slot="toggle" waves-fixed>Information</mdb-dropdown-toggle>
@@ -30,6 +27,9 @@
               <mdb-dropdown-item href="https://github.com/choi94/Boot-Vue-H2-JPA">Github</mdb-dropdown-item>
             </mdb-dropdown-menu>
         </mdb-dropdown>
+        <div class="d-flex" v-if="this.$store.state.session_email != ''">
+          <mdb-nav-item @click="logout" class="mx-3" active>로그아웃</mdb-nav-item>
+        </div>
       </mdb-navbar-nav>
     </mdb-navbar-toggler>
   </mdb-navbar>

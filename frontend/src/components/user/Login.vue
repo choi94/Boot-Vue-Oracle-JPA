@@ -56,7 +56,7 @@
               .catch(({message}) => this.msg = message)
               this.$router.push('/')
             } else {
-              alert('로그인 실패')
+              alert('아이디 또는 비밀번호가 틀렸거나\n존재하지 않는 아이디입니다.')
             }
           })
           .catch(s => {
