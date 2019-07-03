@@ -23,21 +23,7 @@ const store = new Vuex.Store({
       },
       actions: {
         LOGIN ({commit}, {email, password}) {
-            let value = {
-                accountEmail : email,
-                accountPassword : password
-            }
-
-            axios.post(`${uri}/login`, value)
-            .then(({data}) => {
-
-                if (data.result === '로그인 성공'){
-                    commit('LOGIN', data)
-                } else {
-                    alert(data.result)
-                }
-            })
-
+            commit('LOGIN', {email})
         },
         LOGOUT ({commit}) {
           commit('LOGOUT')

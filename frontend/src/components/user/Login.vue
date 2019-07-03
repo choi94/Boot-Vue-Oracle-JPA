@@ -23,6 +23,7 @@
     import { mdbInput, mdbBtn } from 'mdbvue';
     import Footer from '@/components/common/Footer.vue';
     import Header from '@/components/common/Header.vue';
+    import axios from 'axios'
 
   export default {
     name: 'Basic',
@@ -34,19 +35,35 @@
     },
     data : () => {
       return {
+        uri : 'http://localhost:8080/account',
         email : '',
         password : ''
       }
     },
     methods: {
       login() {
-        // LOGIN 액션 실행
-        this.$store.dispatch('LOGIN', {
-                                        email : this.email,
-                                        password : this.password
-                                        })
-          .then()
-          .catch(({message}) => this.msg = message)
+        let data = {
+          accountEmail : this.email,
+          accountPassword : this.password
+        }
+
+        axios.post(`${this.uri}/login`, data)
+          .then(res => {
+            
+            if (res.data.result === '로그인 성공'){
+              this.$store.dispatch('LOGIN', {email : this.email, password : this.password})
+              .then()
+              .catch(({message}) => this.msg = message)
+              this.$router.push('/')
+            } else {
+              alert('로그인 실패')
+            }
+          })
+          .catch(s => {
+            alert('axios 실패')
+          })
+        
+        
       }
 
     }
