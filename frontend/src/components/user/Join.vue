@@ -5,13 +5,14 @@
         <form>
             <p class="h4 text-center mb-4">Sign up</p>
             <div class="grey-text">
-            <mdb-input label="Your name" icon="user" type="text"/>
-            <mdb-input label="Your email" icon="envelope" type="email"/>
-            <mdb-input label="Confirm your email" icon="exclamation-triangle" type="text"/>
-            <mdb-input label="Your password" icon="lock" type="password"/>
+            <mdb-input v-model="name" label="Your name" icon="user" type="text"/>
+            <mdb-input v-model="email" label="Your email" icon="envelope" type="email"/>
+            <mdb-input v-model="confirmEmail" label="Confirm your email" icon="exclamation-triangle" type="text"/>
+            <div class="aniText" v-if="email != confirmEmail">Correct Email</div>
+            <mdb-input v-model="password" label="Your password" icon="lock" type="password"/>
             </div>
             <div class="text-center">
-            <mdb-btn color="primary">Register</mdb-btn>
+              <mdb-btn @click="conTest()" color="primary">Register</mdb-btn>
             </div>
         </form>
     </div>
@@ -22,6 +23,7 @@
   import { mdbInput, mdbBtn } from 'mdbvue';
   import Footer from '@/components/common/Footer.vue';
   import Header from '@/components/common/Header.vue';
+  import axios from 'axios'
 
   export default {
     name: 'Basic',
@@ -30,6 +32,33 @@
       mdbBtn,
       Footer,
       Header
+    },
+    data : () => {
+      return {
+        uri : 'http://localhost:8080/account',
+        email : '',
+        confirmEmail : '',
+        password : '',
+        name : ''
+      }
+    },
+    methods : {
+      conTest() {
+
+        let data = {
+          accountEmail : this.email,
+          accountPassword : this.password,
+          accountName : this.name
+        }
+
+        axios.post(`${this.uri}/join`, data)
+        .then(res => {
+          alert(res.data.result);
+        })
+        .catch(e => {
+          alert('실패ㅠㅠ');
+        })
+      }
     }
   }
 </script>
@@ -40,4 +69,44 @@
     left: 0;
     right: 0;
   }
+.aniText {
+  text-align: center;
+  color: red;
+  animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  -webkit-animation: fadein 2s;
+  -o-animation: fadein 2s;
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 </style>

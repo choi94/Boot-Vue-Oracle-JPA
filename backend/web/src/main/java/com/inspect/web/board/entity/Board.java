@@ -14,12 +14,14 @@ import javax.persistence.Table;
 import com.inspect.web.account.entity.Account;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.stereotype.Component;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Component
 @NoArgsConstructor
 @Entity
 @ToString(exclude = "account")

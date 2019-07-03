@@ -8,6 +8,7 @@ import Board from '@/components/board/Board'
 import Write from '@/components/board/Write'
 import BoardView from '@/components/board/BoardView'
 import Technology from '@/components/common/Technology'
+import Test from '@/components/common/Test'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
       path: '/technology',
       name: 'technology',
       component: Technology
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: Test
     }
   ]
 })

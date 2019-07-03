@@ -12,7 +12,6 @@ import com.inspect.web.board.repository.BoardRepository;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,11 +20,6 @@ public class BoardService {
     @Autowired BoardDTO boardDTO;
     @Autowired Board boardEntity;
     @Autowired ModelMapper modelMapper;
-
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
 
     public long count() {
         return boardRepository.count();

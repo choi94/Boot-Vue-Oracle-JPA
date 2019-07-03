@@ -5,11 +5,11 @@
   <form class="my-5">
     <p class="h4 text-center mb-4">Sign in</p>
     <div class="grey-text">
-      <mdb-input label="Your email" icon="envelope" type="email"/>
-      <mdb-input label="Your password" icon="lock" type="password"/>
+      <mdb-input v-model="email" label="Your email" icon="envelope" type="email"/>
+      <mdb-input v-model="password" label="Your password" icon="lock" type="password"/>
     </div>
     <div class="text-center">
-      <mdb-btn color="primary">Login</mdb-btn>
+      <input class="btn btn-primary" type="button" value="Login" @click="login"/>
     </div>
     <hr class="mt-4 my-4">
       <p class="font-small grey-text d-flex justify-content-end">Forgot your password? <a href="#" class="blue-text ml-1"> Find Password</a></p>
@@ -24,7 +24,6 @@
     import Footer from '@/components/common/Footer.vue';
     import Header from '@/components/common/Header.vue';
 
-    
   export default {
     name: 'Basic',
     components: {
@@ -33,6 +32,24 @@
       Footer,
       Header
     },
+    data : () => {
+      return {
+        email : '',
+        password : ''
+      }
+    },
+    methods: {
+      login() {
+        // LOGIN 액션 실행
+        this.$store.dispatch('LOGIN', {
+                                        email : this.email,
+                                        password : this.password
+                                        })
+          .then()
+          .catch(({message}) => this.msg = message)
+      }
+
+    }
   }
 </script>
 <style scoped>

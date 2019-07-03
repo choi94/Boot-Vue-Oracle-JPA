@@ -9,5 +9,6 @@ import lombok.Data;
 public class AccountDTO {
     private String accountEmail;
     private String accountPassword;
+    private String accountName;
     private String accountReg;
 }
