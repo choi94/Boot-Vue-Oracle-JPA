@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.inspect.web.board.domain.BoardDTO;
 import com.inspect.web.board.entity.Board;
 import com.inspect.web.board.repository.BoardRepository;
+import com.inspect.web.common.Pageing;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,7 @@ public class BoardService {
     @Autowired BoardDTO boardDTO;
     @Autowired Board boardEntity;
     @Autowired ModelMapper modelMapper;
+    @Autowired Pageing pageing;
 
     public long count() {
         return boardRepository.count();
@@ -60,12 +65,36 @@ public class BoardService {
         return boardList.apply(boardRepository);
     }
 
-    public List<BoardDTO> findbyPageing() {
-        Function<BoardRepository, List<BoardDTO>> boardPageing = b -> {
-            Pageable pageing = new PageRequest(0, 7);
-            return null;
+    public HashMap<String,Object> findbyPageing(String pageNum) {
+
+        BiFunction<String ,BoardRepository, HashMap<String,Object>> pageingSet = (s,b) -> {
+            HashMap<String,Object> pageMap = new HashMap<>();
+            int pageNumber = (int) b.count();
+            pageMap.put("totalCount", pageNumber);
+            pageMap.put("pageNum", s);
+            return pageMap;
         };
-        return boardPageing.apply(boardRepository);
+
+        Function<BoardRepository, List<Board>> boardPageing = b -> {
+            pageing.execute(pageingSet.apply(pageNum, b));
+            int startRow = pageing.getStartRow() + 1;
+            int endRow = pageing.getEndRow();
+
+            return b.findByPageing(startRow, endRow);
+        };
+
+        List<Board> value = boardPageing.apply(boardRepository);
+        List<BoardDTO> dtoValue = new ArrayList<>();
+
+        for (Board b : value){
+            dtoValue.add(modelMapper.map(b, BoardDTO.class));
+        }
+
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("list", dtoValue);
+        result.put("pageing", pageing);
+
+        return result;
     }
 
     public BoardDTO findById(Long boardNum) {

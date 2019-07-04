@@ -13,6 +13,7 @@ import com.inspect.web.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -22,15 +23,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class BoardController {
     @Autowired BoardService boardService;
     
-    @GetMapping(value = "/list")
-    public List<BoardDTO> list() {
-        return boardService.findAll();
+    @GetMapping(value = "/list/{pageNum}")
+    public HashMap<String,Object> list(@PathVariable("pageNum")String pageNum) {
+        return boardService.findbyPageing(pageNum);
     }
 
     @PostMapping(value="/write")
     public HashMap<String, Object> write(@RequestBody Board board) {
-        System.out.println("들어옴!");
-        System.out.println(board.toString());
         return boardService.save(board);
     }
 

@@ -24,7 +24,7 @@ public class Pageing {
         pageNum = (_pageNum == null) ? 1 : Integer.parseInt(_pageNum);
 
         String _pageSize = (String)params.get("pageSize");
-        pageSize = (_pageSize == null) ? 7 : Integer.parseInt(_pageSize);
+        pageSize = (_pageSize == null) ? 5 : Integer.parseInt(_pageSize);
 
         String _blockSize = (String)params.get("blockSize");
         blockSize = (_blockSize == null) ? 5 : Integer.parseInt(_blockSize);
