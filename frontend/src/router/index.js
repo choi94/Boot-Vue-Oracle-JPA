@@ -48,7 +48,8 @@ export default new Router({
     {
       path: '/boardview',
       name: 'boardview',
-      component: BoardView
+      component: BoardView,
+      props : true
     },
     {
       path: '/technology',

@@ -1,15 +1,14 @@
-# spring:
-#     datasource:
-#         url: jdbc:h2:mem:testdb;
-#         driverClassName: org.h2.Driver
-#         username: sa
-#         password:
-#     jpa:
-#         database-platform: org.hibernate.dialect.H2Dialect
-
 spring:
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521/orcl
-    username: system
-    password: oracle
     driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/orcl
+    username: C##CHOI_VUE
+    password: oracle
+  jpa:
+    show-sql: true
+    database: oracle
+    hibernate:
+      ddl-auto: update
+  mvc:
+    view:
+      suffix: .html
